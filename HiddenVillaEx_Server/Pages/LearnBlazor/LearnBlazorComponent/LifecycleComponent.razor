@@ -1,0 +1,38 @@
+﻿<h1>Lifecycle Child Component Events</h1>
+
+<br />
+
+@*<p>Current count: @currentCount</p>
+	<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>*@
+
+@foreach (var item in EventType)
+{
+	@item
+	<hr />
+
+}
+
+@code {
+
+	[Parameter]
+	public int CountValue { get; set; }
+
+	List<string> EventType = new List<string>();
+
+	protected override void OnInitialized()
+	{
+		EventType.Add("Child - OnInititialized is called");
+	}
+
+	protected override void OnParametersSet()
+	{
+		EventType.Add("Child - OnParametersSet is called");
+	}
+
+	protected override async Task OnParametersSetAsync()
+	{
+		EventType.Add("Child - OnParametersSetAsync is called");
+		await Task.Delay(1000);
+	}
+
+}

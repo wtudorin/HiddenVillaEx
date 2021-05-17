@@ -1,0 +1,116 @@
+﻿@page "/demoHotel"
+@using Model
+
+<h2>We will dispaly hotel rooms and amenities here!</h2>
+<div class="border p-2 mt-2" style="background-color:azure">
+	<h3 class="text-info">Room List [USING COMPONENT]</h3>
+	<div class="row container">
+		<div class="col-12">
+			<h4 class="text-info">Hotel Room's</h4>
+			<span>Rooms selected = @SelectedRooms</span>
+		</div>
+		@foreach (var room in RoomsList)
+		{
+			<IndividualRoom Room="room" OnRoomCheckBoxSelection="RoomSelectionCounterChange"></IndividualRoom>
+		}
+
+		<div class="col-12 mt-4">
+			<h4 class="text-info">Hotel Amenities</h4>
+		</div>
+		@foreach (var amenity in AmenityList)
+		{
+			<IndividualAmenities Amenity="amenity" OnAmenityClick="AminitySelectionChanged">
+				<R1>#1</R1>
+				<R2>#2</R2>
+			</IndividualAmenities>
+		}
+		<br />
+		<div>
+			<span class="text-secondary p-2 ml-2">Amenity selected: @AmenitySelected</span>
+		</div>
+	</div>
+</div>
+
+@code {
+
+	List<BlazorRoom> RoomsList = new List<BlazorRoom>();
+	List<BlazorAmenity> AmenityList = new List<BlazorAmenity>();
+	public int SelectedRooms { get; set; } = 0;
+	public string AmenitySelected { get; set; }
+
+	protected override void OnInitialized()
+	{
+		base.OnInitialized();
+
+		this.AmenityList.Add(new BlazorAmenity()
+		{
+			Id = 501,
+			AmenityName = "Swimming Pool",
+			Description = "Pool room with plenty of entertainment features",
+		});
+		this.AmenityList.Add(new BlazorAmenity()
+		{
+			Id = 502,
+			AmenityName = "SPA",
+			Description = "Pleanty of steam to depurate your body and soul",
+		});
+		this.AmenityList.Add(new BlazorAmenity()
+		{
+			Id = 503,
+			AmenityName = "Tanning Centre",
+			Description = "Be ready and less whitey for summer! The best equipment to protect your skin and give you the best look!",
+		});
+		this.AmenityList.Add(new BlazorAmenity()
+		{
+			Id = 504,
+			AmenityName = "Gym",
+			Description = "Flex your muscles and show off in one of the 5 gyms we have in the Hotel",
+		});
+		this.AmenityList.Add(new BlazorAmenity()
+		{
+			Id = 505,
+			AmenityName = "Free Breakfast",
+			Description = "Enjoy our free complimentary breakfast Monday to Friday. Choose your preferred breakfast from our multicultural menu",
+		});
+		this.RoomsList.Add(new BlazorRoom()
+		{
+			Id = 201,
+			RoomName = "Villa Serena One Bed Room",
+			IsActive = true,
+			Price = 399,
+			RoomProps = new List<BlazorRoomProp> {
+			new BlazorRoomProp {Id = 1, Name="Sq m", Value = "300"},
+			new BlazorRoomProp {Id = 2, Name="Occupancy", Value = "4"}
+			}
+		});
+		this.RoomsList.Add(new BlazorRoom()
+		{
+			Id = 1,
+			RoomName = "Villa Serena Two Bed Room",
+			IsActive = true,
+			Price = 699,
+			RoomProps = new List<BlazorRoomProp> {
+			new BlazorRoomProp {Id = 1, Name="Sq m", Value = "150"},
+			new BlazorRoomProp {Id = 2, Name="Occupancy", Value = "6"}
+			}
+		});
+	}
+
+	protected void RoomSelectionCounterChange(bool isRoomSelected)
+	{
+		if (isRoomSelected)
+		{
+			SelectedRooms++;
+		}
+		else
+		{
+			SelectedRooms--;
+		}
+	}
+
+	protected void AminitySelectionChanged(string amenityName)
+	{
+		AmenitySelected = amenityName;
+	}
+
+}

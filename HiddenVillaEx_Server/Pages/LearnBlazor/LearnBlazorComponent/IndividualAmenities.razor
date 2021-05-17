@@ -1,0 +1,29 @@
+﻿@using Model
+
+<div class="bg-light border p-2 col-5" @onclick=AminityClicked>
+	<h4 class="text-secondary">Amenity - @Amenity.Id</h4>
+	@Amenity.AmenityName <br />
+	@Amenity.Description <br />
+	RF from Parent - @R1 @R2
+</div>
+
+@code {
+
+	[Parameter]
+	public BlazorAmenity Amenity { get; set; }
+
+	[Parameter]
+	public EventCallback<string> OnAmenityClick { get; set; }
+
+	private async Task AminityClicked()
+	{
+		await OnAmenityClick.InvokeAsync(Amenity.AmenityName);
+	}
+
+	[Parameter]
+	public RenderFragment R1 { get; set; }
+
+	[Parameter]
+	public RenderFragment R2 { get; set; }
+
+}
