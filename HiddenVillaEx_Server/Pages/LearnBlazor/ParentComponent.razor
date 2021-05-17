@@ -9,19 +9,12 @@
 		You're in ddeep shit!!! Render Fragment from Parent! Whoooooo Hoooo!
 	</DangerChildContent>
 </ChildComponent>
-<AnotherChildComponent InputAttributes="InputAttributes"></AnotherChildComponent>
+<AnotherChildComponent placeholder="Placeholder from Gran Parent"></AnotherChildComponent>
 
 <p class="p-2 mt-2"><b>@messageText</b></p>
 
 @code {
 	private string messageText = "";
-
-	private Dictionary<string, object> InputAttributes { get; set; } = new Dictionary<string, object>()
-{
-		{"required", "required" },
-		{"placeholder", "Initial Text from Parent" },
-		{"maxLength", "5" }
-	};
 
 	private void ShowMessage(MouseEventArgs e)
 	{

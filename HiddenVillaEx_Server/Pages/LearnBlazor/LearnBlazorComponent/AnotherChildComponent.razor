@@ -7,19 +7,7 @@
 
 @code {
 
-	//[Parameter]
-	//public string Placeholder { get; set; } = "Placeholder from Child";
-	//[Parameter]
-	//public string Required { get; set; } = "required";
-	//[Parameter]
-	//public string MaxLength { get; set; } = "10";
-
-	[Parameter]
-	public Dictionary<string, object> InputAttributes { get; set; } = new Dictionary<string, object>()
-{
-		{"required", "required" },
-		{"placeholder", "Initial Text" },
-		{"maxLength", "10" }
-	};
+	[Parameter(CaptureUnmatchedValues = true)]
+	public Dictionary<string, object> InputAttributes { get; set; } = new Dictionary<string, object>();
 
 }
